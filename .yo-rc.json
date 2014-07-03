@@ -1,0 +1,10 @@
+{
+  "generator-reveal": {
+    "presentationTitle": "Machine Learning",
+    "packageVersion": "0.0.0",
+    "useSass": false,
+    "deployToGithubPages": true,
+    "githubUsername": "ceres-pallas",
+    "githubRepository": "machine-learning-presentation"
+  }
+}
