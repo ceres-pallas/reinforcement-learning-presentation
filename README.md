@@ -84,6 +84,13 @@ grunt dist
 
 builds a distribution that can be statically hosted.
 
+You can deploy this distribution to the github pages with teh
+following command.
+
+```sh
+grunt deploy
+```
+
 [yo]: http://yeoman.io/
 [grunt]: http://gruntjs.com/
 [bower]: http://bower.io/
