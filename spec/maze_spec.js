@@ -14,24 +14,26 @@ describe('Maze', function(){
 			maze = new Maze();
 		});
 
-		it('should accept a goal', function(){
-			maze.addGoal(4, 3);
+		describe('of Goals', function(){
+			it('should accept a goal', function(){
+				maze.addGoal(4, 3);
 
-			var goals = maze.goals();
+				var goals = maze.goals();
 
-			expect(goals.length).toEqual(1);
-			expect(goals[0]).toEqual([4, 3]);
-		});
+				expect(goals.length).toEqual(1);
+				expect(goals[0]).toEqual([4, 3]);
+			});
 
-		it('should accept multiple goals', function(){
-			maze.addGoal(4, 3);
-			maze.addGoal(3, 4);
+			it('should accept multiple goals', function(){
+				maze.addGoal(4, 3);
+				maze.addGoal(3, 4);
 
-			var goals = maze.goals();
+				var goals = maze.goals();
 
-			expect(goals.length).toEqual(2);
-			expect(goals[0]).toEqual([4, 3]);
-			expect(goals[1]).toEqual([3, 4]);
+				expect(goals.length).toEqual(2);
+				expect(goals[0]).toEqual([4, 3]);
+				expect(goals[1]).toEqual([3, 4]);
+			});
 		});
 	});
 });
