@@ -34,6 +34,14 @@ describe('Maze', function(){
 				expect(goals[0]).toEqual([4, 3]);
 				expect(goals[1]).toEqual([3, 4]);
 			});
+
+			it('should be able to set the reward', function(){
+				maze.addGoal(4, 3, -5);
+
+				var reward = maze.rewardFor([4, 3]);
+
+				expect(reward).toEqual(-5);
+			});
 		});
 	});
 });
