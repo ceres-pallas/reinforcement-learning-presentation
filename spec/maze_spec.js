@@ -56,3 +56,53 @@ describe('Maze', function(){
 		});
 	});
 });
+
+describe('MazeView', function(){
+	var container;
+
+	beforeEach(function(){
+		container = document.createElement('div');
+	});
+
+	it('a container should be provided', function(){
+		expect(container).toBeDefined();
+	});
+
+	it('should exist', function(){
+		expect(MazeView).toBeDefined();
+	});
+
+	it('should be a function', function(){
+		expect(typeof(MazeView)).toBe('function');
+	});
+
+	describe('creation of Canvas', function(){
+		var maze;
+
+		beforeEach(function(){
+			maze = new Maze();
+
+			maze.addGoal(3,2, 1);
+			maze.addGoal(3,1, -1);
+
+			maze.addObstruction(1,1);
+		});
+
+		it('should create a canvas', function(){
+			new MazeView(maze, container, { width: 40, height: 30 });
+
+			expect(container.getElementsByTagName('canvas').length).toBe(1);
+		});
+
+		it('should create a canvas of right dimensions', function(){
+			new MazeView(maze, container, { width: 400, height: 300 });
+
+			var canvas = container.getElementsByTagName('canvas')[0];
+
+			expect(canvas.width).toBe(400);
+			expect(canvas.height).toBe(300);
+
+		});
+	});
+
+});
