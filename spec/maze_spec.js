@@ -43,5 +43,16 @@ describe('Maze', function(){
 				expect(reward).toEqual(-5);
 			});
 		});
+
+		describe('of Obstructions', function(){
+			it('should accept an obstruction', function(){
+				maze.addObstruction(3,2);
+
+				var obstructions = maze.obstructions();
+
+				expect(obstructions.length).toEqual(1);
+				expect(obstructions[0]).toEqual([3,2]);
+			});
+		});
 	});
 });

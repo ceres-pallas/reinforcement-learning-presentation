@@ -18,6 +18,7 @@
 
 	var Maze = $.Maze = function(){
 		this._goals = [];
+		this._obstructions = [];
 	};
 
 	Maze.prototype.addGoal = function(x, y, reward){
@@ -33,4 +34,10 @@
 			return position.at(state);
 		}).reduce(function(subtotal, current){ return subtotal + current.reward(); }, 0);
 	};
+	Maze.prototype.addObstruction = function(x, y) {
+		this._obstructions.push(new Position(x, y, 0));
+	}
+	Maze.prototype.obstructions = function(){
+		return this._obstructions.map(function(position){ return position.state(); });
+	}
 })(window || module.exports);
