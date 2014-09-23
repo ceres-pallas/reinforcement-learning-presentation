@@ -54,7 +54,12 @@
 	}
 
         Maze.prototype.getPossibleActions = function() {
-	    return [1, 1, 1, 1];
+	    return [
+		{state: {x: this._state.x, y: this._state.y + 1}, action: "up"}, 
+		{state: {x: this._state.x + 1, y: this._state.y}, action: "right"}, 
+		{state: {x: this._state.x, y: this._state.y - 1}, action: "down"}, 
+		{state: {x: this._state.x - 1, y: this._state.y}, action: "left"}
+	    ];
 	}
 
 	var MazeView = $.MazeView = function(model, container, options){

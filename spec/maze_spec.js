@@ -92,9 +92,51 @@ describe('Maze', function(){
 	    it('should have 4 possible actions', function() {
 		var possibleActions = maze.getPossibleActions();
 		expect(possibleActions.length).toBe(4);
-
 	    });
-	});
+	    
+	    describe('Actiontypes', function() {
+		it('should have up, down, left and right as possible actions', function() {
+		    var possibleActions = maze.getPossibleActions();
+		
+		    expect(possibleActions[0].action).toBe("up");
+		    expect(possibleActions[1].action).toBe("right");
+		    expect(possibleActions[2].action).toBe("down");
+		    expect(possibleActions[3].action).toBe("left");
+		});
+	    });
+
+	    describe('up', function() {
+		it('should have a result state one y up', function() {
+		    var possibleActions = maze.getPossibleActions();
+		    
+		    expect(possibleActions[0].state).toEqual({x:0, y:1});
+		});
+	    });
+
+	    describe('right', function() {
+		it('should have a result state one x more', function() {
+		    var possibleActions = maze.getPossibleActions();
+		    
+		    expect(possibleActions[1].state).toEqual({x:1, y:0});
+		});
+	    });
+
+	    describe('down', function() {
+		it('should have a result state one y less', function() {
+		    var possibleActions = maze.getPossibleActions();
+		    
+		    expect(possibleActions[2].state).toEqual({x:0, y:-1});	
+		});
+	    });
+
+	    describe('left', function() {
+		it('should have a result state one x less', function() {
+		    var possibleActions = maze.getPossibleActions();
+		
+			expect(possibleActions[3].state).toEqual({x:-1, y:0});
+		    });
+		});
+	    });
 });
 
 describe('MazeView', function(){
