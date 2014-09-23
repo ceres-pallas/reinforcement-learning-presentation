@@ -19,6 +19,10 @@
 	var Maze = $.Maze = function(){
 		this._goals = [];
 		this._obstructions = [];
+	        this._state = {
+		    x: 0,
+		    y: 0
+		};
 	};
 
 	Maze.prototype.addGoal = function(x, y, reward){
@@ -41,6 +45,14 @@
 		return this._obstructions.map(function(position){ return position.state(); });
 	}
 
+        Maze.prototype.currentState = function(state) {
+	    if(state) {
+		this._state = state;
+	    }
+
+	    return this._state;
+	}
+
 	var MazeView = $.MazeView = function(model, container, options){
 		this.model = model;
 		this.container = container;
@@ -59,4 +71,6 @@
 		}
 		return this._canvas.getContext('2d');
 	};
+
+        
 })(window || module.exports);

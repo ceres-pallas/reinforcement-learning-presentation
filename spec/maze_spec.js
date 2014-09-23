@@ -54,7 +54,35 @@ describe('Maze', function(){
 				expect(obstructions[0]).toEqual([3,2]);
 			});
 		});
+
 	});
+
+        describe('State', function() {
+	    var maze;
+
+	    beforeEach(function(){
+		maze = new Maze();
+	    });
+
+	    it('should have a state', function() {
+		expect(maze.currentState()).toBeDefined();
+	    });
+
+	    it('should have a default state with an x and a y', function() {
+		var currentState = maze.currentState();
+		expect(currentState.x).toBe(0);
+		expect(currentState.y).toBe(0);
+	    });
+
+	    it('should be able to adopt a new state', function() {
+		maze.currentState({x:1, y:2});
+		var currentState = maze.currentState();
+		expect(currentState.x).toBe(1);
+		expect(currentState.y).toBe(2);
+	    });
+
+	});
+
 });
 
 describe('MazeView', function(){
