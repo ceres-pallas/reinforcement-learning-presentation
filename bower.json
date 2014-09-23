@@ -2,7 +2,8 @@
   "name": "machine-learning",
   "version": "0.0.0",
   "dependencies": {
-    "reveal.js": "~2.6.1"
+    "reveal.js": "~2.6.1",
+    "function-approximator": "~0.0.0"
   },
   "devDependencies": {
     "jasmine": "~2.0.0"
