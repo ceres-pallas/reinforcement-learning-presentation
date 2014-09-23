@@ -53,6 +53,10 @@
 	    return this._state;
 	}
 
+        Maze.prototype.getPossibleActions = function() {
+	    return [1, 1, 1, 1];
+	}
+
 	var MazeView = $.MazeView = function(model, container, options){
 		this.model = model;
 		this.container = container;

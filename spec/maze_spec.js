@@ -83,6 +83,18 @@ describe('Maze', function(){
 
 	});
 
+        describe('Actions', function() {
+	    var maze;
+	    beforeEach(function() {
+		maze = new Maze();
+	    });
+	   
+	    it('should have 4 possible actions', function() {
+		var possibleActions = maze.getPossibleActions();
+		expect(possibleActions.length).toBe(4);
+
+	    });
+	});
 });
 
 describe('MazeView', function(){
