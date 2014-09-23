@@ -44,22 +44,47 @@
 	Maze.prototype.obstructions = function(){
 		return this._obstructions.map(function(position){ return position.state(); });
 	}
+        Maze.prototype.isObstructed = function(state) {
+	    return this._obstructions.filter(function(position){
+			return position.at(state);
+		}).length > 0;
+	} 
 
         Maze.prototype.currentState = function(state) {
 	    if(state) {
 		this._state = state;
 	    }
+	    
 
 	    return this._state;
 	}
 
         Maze.prototype.getPossibleActions = function() {
-	    return [
+	    var possibleActions = [
 		{state: {x: this._state.x, y: this._state.y + 1}, action: "up"}, 
 		{state: {x: this._state.x + 1, y: this._state.y}, action: "right"}, 
 		{state: {x: this._state.x, y: this._state.y - 1}, action: "down"}, 
-		{state: {x: this._state.x - 1, y: this._state.y}, action: "left"}
-	    ];
+		{state: {x: this._state.x - 1, y: this._state.y}, action: "left"}];
+	    
+	    var spliceAction = function(action) {
+		return this.filter(function(it) {
+		    return it.action != action;
+		});
+	    }
+
+	    if(this.isObstructed([this._state.x, this._state.y+1])) {
+		possibleActions = spliceAction.call(possibleActions, "up");
+	    }
+	    if(this.isObstructed([this._state.x+1, this._state.y])) {
+		possibleActions = spliceAction.call(possibleActions, "right");	
+	    }
+	    if(this.isObstructed([this._state.x, this._state.y-1])) {
+		possibleActions = spliceAction.call(possibleActions, "down");
+	    }
+	    if(this.isObstructed([this._state.x-1, this._state.y])) {
+		possibleActions = spliceAction.call(possibleActions, "left");
+	    }
+	    return possibleActions;
 	}
 
 	var MazeView = $.MazeView = function(model, container, options){
