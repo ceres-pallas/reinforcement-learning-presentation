@@ -54,7 +54,7 @@ describe('Maze', function(){
 				expect(obstructions[0]).toEqual([3,2]);
 			});
 
-		        it('should check a state for an obstruction', function() {
+			it('should check a state for an obstruction', function() {
 			    expect(maze.isObstructed([1, 0])).toBeFalsy();
 			    maze.addObstruction(1,0);
 
@@ -64,7 +64,7 @@ describe('Maze', function(){
 
 	});
 
-        describe('State', function() {
+	describe('State', function() {
 	    var maze;
 
 	    beforeEach(function(){
@@ -90,7 +90,7 @@ describe('Maze', function(){
 
 	});
 
-        describe('Actions', function() {
+	describe('Actions', function() {
 	    var maze;
 	    beforeEach(function() {
 		maze = new Maze();
@@ -116,13 +116,13 @@ describe('Maze', function(){
 		it('should have a result state one y up', function() {
 		    var possibleActions = maze.getPossibleActions();
 		    
-		    expect(possibleActions[0].state).toEqual({x:0, y:1});
+		    expect(possibleActions[0].state).toEqual(new Position(0, 1));
 		});
 
 		it('should not have a possible action "up" if there is an obstruction above it', function() {
 		    maze.addObstruction(0,1);
 		    var possibleActions = maze.getPossibleActions();
-		    expect(possibleActions).not.toContain({action: "up", state: {x:0, y:1}});
+		    expect(possibleActions).not.toContain({action: "up", state: new Position(0, 1)});
 		});
 	    });
 
@@ -130,13 +130,13 @@ describe('Maze', function(){
 		it('should have a result state one x more', function() {
 		    var possibleActions = maze.getPossibleActions();
 		    
-		    expect(possibleActions[1].state).toEqual({x:1, y:0});
+		    expect(possibleActions[1].state).toEqual(new Position(1, 0));
 		});
 
 		it('should not have a possible action "right" if there is an obstruction to the right of it', function() {
 		    maze.addObstruction(1,0);
 		    var possibleActions = maze.getPossibleActions();
-		    expect(possibleActions).not.toContain({action: "right", state: {x:1, y:0}});
+		    expect(possibleActions).not.toContain({action: "right", state: new Position(1, 0)});
 		});
 
 	    });
@@ -145,13 +145,13 @@ describe('Maze', function(){
 		it('should have a result state one y less', function() {
 		    var possibleActions = maze.getPossibleActions();
 		    
-		    expect(possibleActions[2].state).toEqual({x:0, y:-1});	
+		    expect(possibleActions[2].state).toEqual(new Position(0, -1));	
 		});
 
 		it('should not have a possible action "down" if there is an obstruction to the right of it', function() {
 		    maze.addObstruction(0,-1);
 		    var possibleActions = maze.getPossibleActions();
-		    expect(possibleActions).not.toContain({action: "down", state: {x:0, y:-1}});
+		    expect(possibleActions).not.toContain({action: "down", state: new Position(0, -1)});
 		});
 	    });
 
@@ -159,7 +159,7 @@ describe('Maze', function(){
 		it('should have a result state one x less', function() {
 		    var possibleActions = maze.getPossibleActions();
 		
-			expect(possibleActions[3].state).toEqual({x:-1, y:0});
+			expect(possibleActions[3].state).toEqual(new Position(-1, 0));
 		    });
 		});
 
@@ -167,10 +167,10 @@ describe('Maze', function(){
 		    maze.addObstruction(-1,0);
 		    var possibleActions = maze.getPossibleActions();
 
-		    expect(possibleActions).not.toContain({action: "left", state: {x:-1, y:0}});
+		    expect(possibleActions).not.toContain({action: "left", state: new Position(-1, 0)});
 		});
 	    });
-            it('should have 4-x possible actions where x is the amount of obstructions that surround it', function() {
+	    it('should have 4-x possible actions where x is the amount of obstructions that surround it', function() {
 		var maze = new Maze();
 		maze.currentState({x: 4, y: 4});
 		expect(maze.getPossibleActions().length).toBe(4);
