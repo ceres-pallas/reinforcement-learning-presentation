@@ -17,11 +17,13 @@
         var Goal = function(x, y, reward) {
 	    Position.call(this, x, y);
 	    this._reward = reward;
-	}
+	};
+
         Goal.prototype = new Position();
+
         Goal.prototype.reward = function(){
    	    return this._reward;
-        }
+        };
 
 	var Maze = $.Maze = function(){
 		this._goals = [];
@@ -70,12 +72,6 @@
 		{state: new Position(this._state.x, this._state.y - 1), action: 'down'}, 
 		{state: new Position(this._state.x - 1, this._state.y), action: 'left'}];
 	    
-	    var spliceAction = function(action) {
-		return this.filter(function(it) {
-		    return it.action != action;
-		});
-	    }
-
 		var spliceAction = function(action) {
 			return this.filter(function(it) {
 				return it.action !== action;
