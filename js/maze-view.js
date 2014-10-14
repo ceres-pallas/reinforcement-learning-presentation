@@ -1,5 +1,5 @@
- /*global window, module*/
-(function($){
+ /*global window, module, document*/
+(function($, document){
 	'use strict';
 	var MazeView = $.MazeView = function(model, container, options){
 		this.model = model;
@@ -9,6 +9,8 @@
 	};
 	MazeView.prototype.update = function(){
 		var ctx = this.context();
+		ctx.save();
+		ctx.restore();
 	};
 	MazeView.prototype.context = function(){
 		if (!this._canvas) {
@@ -19,4 +21,4 @@
 		}
 		return this._canvas.getContext('2d');
 	};
-})(window || module.exports);
+})(window || module.exports, document);
