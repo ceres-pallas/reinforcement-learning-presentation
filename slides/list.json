@@ -14,6 +14,11 @@
 				"data-state": "inverted-pendulum"
 			}
 		},
-		"inverted-pendulum-ai.html"
+		{
+			"filename": "inverted-pendulum-ai.html",
+			"attr": {
+				"data-state": "inverted-pendulum-ai"
+			}
+		}
 	]
 ]
