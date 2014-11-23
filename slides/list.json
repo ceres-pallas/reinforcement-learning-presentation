@@ -6,5 +6,14 @@
     "learning.md",
     "reinforcement-learning.md",
     "russel-and-norvig.md",
-    "maze.html"
+    "maze.html",
+	[
+		{
+			"filename": "inverted-pendulum.html",
+			"attr": {
+				"data-state": "inverted-pendulum"
+			}
+		},
+		"inverted-pendulum-ai.html"
+	]
 ]
