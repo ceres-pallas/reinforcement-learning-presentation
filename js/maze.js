@@ -26,10 +26,11 @@
         };
 
 	var Maze = $.Maze = function(){
-		this._goals = [];
-		this._obstructions = [];
-	        this._boundaries = [];
-	        this._state = new Position(0, 0);
+	    this._goals = [];
+	    this._obstructions = [];
+	    this._boundaries = [];
+	    this._state = new Position(0, 0);
+	    this.ended = false;
 	};
 
 	Maze.prototype.addGoal = function(x, y, reward){
@@ -56,6 +57,18 @@
 			return position.at(state);
 		}).length > 0;
 	};
+        Maze.prototype.isGoal = function(state) {
+	    return this._goals.filter(function(position){
+			return position.at(state);
+		}).length > 0;
+	};
+
+        Maze.prototype.tick = function(action) {
+	    var newState =  this.currentState(action.state);
+	    if(this.isGoal([newState.x, newState.y])) {
+		this.ended = true;
+	    } 
+	}
 
 	Maze.prototype.currentState = function(state) {
 		if(state) {

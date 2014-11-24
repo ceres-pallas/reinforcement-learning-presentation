@@ -57,11 +57,9 @@ describe('Maze', function(){
 			it('should check a state for an obstruction', function() {
 			    expect(maze.isObstructed([1, 0])).toBeFalsy();
 			    maze.addObstruction(1,0);
-
 			    expect(maze.isObstructed([1, 0])).toBeTruthy();
 			});
 		});
-
 	});
 
 	describe('State', function() {
@@ -103,8 +101,7 @@ describe('Maze', function(){
 	    
 	    describe('Actiontypes', function() {
 		it('should have up, down, left and right as possible actions', function() {
-		    var possibleActions = maze.getPossibleActions();
-		
+		    var possibleActions = maze.getPossibleActions();	
 		    expect(possibleActions[0].action).toBe("up");
 		    expect(possibleActions[1].action).toBe("right");
 		    expect(possibleActions[2].action).toBe("down");
@@ -114,8 +111,7 @@ describe('Maze', function(){
 
 	    describe('up', function() {
 		it('should have a result state one y up', function() {
-		    var possibleActions = maze.getPossibleActions();
-		    
+		    var possibleActions = maze.getPossibleActions();		    
 		    expect(possibleActions[0].state).toEqual(new Position(0, 1));
 		});
 
@@ -157,8 +153,7 @@ describe('Maze', function(){
 
 	    describe('left', function() {
 		it('should have a result state one x less', function() {
-		    var possibleActions = maze.getPossibleActions();
-		
+		    var possibleActions = maze.getPossibleActions();		
 			expect(possibleActions[3].state).toEqual(new Position(-1, 0));
 		    });
 		});
@@ -183,7 +178,103 @@ describe('Maze', function(){
 		maze.addObstruction(5,4);
 		expect(maze.getPossibleActions().length).toBe(0);
 	    });
+            it('should adopt a new state if that action is performed', function() {
+		var maze = new Maze();
+		expect(maze.currentState()).toEqual(new Position(0,0));
+		maze.tick(maze.getPossibleActions()[0])
+		expect(maze.currentState()).toEqual(new Position(0,1));
+
+	    });
+            it('should know if a state is a goal state', function() {
+		var maze = new Maze()
+		maze.addGoal(1,1,1);
+		expect(maze.isGoal([1,1])).toBeTruthy();
+	    });
+            it('should end if a state that is reached is a goal state', function() {
+		var maze = new Maze();
+		maze.addGoal(0, 1, -1);
+		maze.tick(maze.getPossibleActions()[0]);
+		expect(maze.ended).toBeTruthy();
+	    });
+    
+    describe('should have reinforcement learning', function() {
+
+	describe('FunctionApproximator', function() {
+	    
+	    it('should exist', function() {
+		expect(FunctionApproximator).toBeDefined()
+	    });
+
+	});
+
+	describe('SimpleAgent', function() {
+	    
+	    it('should exist', function() {
+		expect(SimpleAgent).toBeDefined()
+	    });
+	    
+	});
+
+    });
+
+    
 });
+
+describe('Helper functions', function() {
+    it('should exist and be a function', function() {
+	expect(Helper).toBeDefined();
+
+    });
+
+    describe('StateLoopRemover', function() {
+
+
+	describe('should find the last occurence of a state in a stack', function() {
+	    var stateStack;
+
+	    beforeEach(function(){
+		stateStack = [
+		    { state: {x:1, y:1}}, 
+		    { state: {x:2, y:1}},
+		    { state: {x:1, y:1}},
+		    { state: {x:2, y:2}},
+		    { state: {x:1, y:1}},
+		    { state: {x:2, y:2}}
+		];
+	    });
+		
+	    it('should return same index if it is the only occurence ', function() {
+		expect(Helper.StateLoopRemover.findLastOccurence(stateStack, 1)).toBe(1);
+	    });
+	    it('should return the index of the last occurence ', function() {
+		expect(Helper.StateLoopRemover.findLastOccurence(stateStack, 0)).toBe(4);
+		expect(Helper.StateLoopRemover.findLastOccurence(stateStack, 3)).toBe(5);
+	    }); 
+
+	    it('should not trim if there is not loop', function() {
+		expect(Helper.StateLoopRemover.removeLoop(stateStack, 1)).toEqual([
+		    { state: {x:1, y:1}}, 
+		    { state: {x:2, y:1}},
+		    { state: {x:1, y:1}},
+		    { state: {x:2, y:2}},
+		    { state: {x:1, y:1}},
+		    { state: {x:2, y:2}}
+		]);
+	    });
+
+	    it('should trim everything between first occurence and last occurence ', function() {
+		expect(Helper.StateLoopRemover.removeLoop(stateStack, 0)).toEqual([
+		    { state: {x:1, y:1}},
+		    { state: {x:2, y:2}}
+		]);
+
+		
+	    });   
+	});
+    });
+});
+
+
 
 describe('MazeView', function(){
 	var container;
