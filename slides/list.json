@@ -2,6 +2,23 @@
     "index.md",
     "ai.md",
     "machine-learning.md",
+    "reinforcement.md",
+    "learning.md",
     "reinforcement-learning.md",
-    "maze.html"
+    "russel-and-norvig.md",
+    "maze.html",
+	[
+		{
+			"filename": "inverted-pendulum.html",
+			"attr": {
+				"data-state": "inverted-pendulum"
+			}
+		},
+		{
+			"filename": "inverted-pendulum-ai.html",
+			"attr": {
+				"data-state": "inverted-pendulum-ai"
+			}
+		}
+	]
 ]

@@ -4,7 +4,8 @@
   "dependencies": {
     "reveal.js": "~2.6.1",
     "function-approximator": "~0.0.0",
-    "simple-agent": "~0.0.0"
+    "simple-agent": "~0.0.0",
+    "inverted-pendulum": "~0.0.0"
   },
   "devDependencies": {
     "jasmine": "~2.0.0"
