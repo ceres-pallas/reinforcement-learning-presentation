@@ -8,6 +8,8 @@
 		var deltas = this.deltas();
 		this.options.dx = deltas[0];
 		this.options.dy = deltas[1];
+		this.options.mx = deltas[2];
+		this.options.my = deltas[3];
 		this.update();
 	};
 	MazeView.prototype.deltas = function(){
@@ -30,20 +32,24 @@
 		console.log('%o', maxima);
 		return [
 			this.options.width/(maxima.max[0] - maxima.min[0]),
-			this.options.height/(maxima.max[1] - maxima.min[1])
+			this.options.height/(maxima.max[1] - maxima.min[1]),
+			maxima.min[0],
+			maxima.min[1]
 		];
 	};
 	MazeView.prototype.update = function(){
 		var ctx = this.context();
 		var dx = this.options.dx;
 		var dy = this.options.dy;
+		var mx = this.options.mx;
+		var my = this.options.my;
 		ctx.save();
 		ctx.fillStyle = 'white';
 		ctx.fillRect(0,0, this.options.width, this.options.height);
 		ctx.fillStyle = 'black';
 		this.model.obstructions().forEach(function(position){
 			var x = position[0], y = position[1];
-			ctx.fillRect(x * dx, y * dy, dx, dy);
+			ctx.fillRect((x - mx) * dx, (y - my) * dy, dx, dy);
 
 		});
 		ctx.restore();

@@ -8,6 +8,7 @@
 			var container = document.getElementById('walkthrough-maze');
 
 			var maze = new Maze();
+			maze.addObstruction(-2, -2);
 			maze.addObstruction(0, 0);
 			maze.addObstruction(1, 1);
 			maze.addObstruction(2, 2);
