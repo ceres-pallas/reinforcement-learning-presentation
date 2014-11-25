@@ -86,7 +86,7 @@
 	problem.ended = false;
 	problem.currentState({x:0, y:0});
     	count++;
-	console.log("log");
+	console.log('count %s', count);
 	run();
     }
 
