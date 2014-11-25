@@ -1,4 +1,4 @@
- /*global window, module, document, console*/
+ /*global window, module, document*/
 (function($, document){
 	'use strict';
 	var MazeView = $.MazeView = function(model, container, options){
@@ -14,7 +14,6 @@
 	};
 	MazeView.prototype.deltas = function(){
 		var maxima = this.model.obstructions().reduce(function(maxima, position){
-			console.log(position);
 			return {
 				min: [
 					Math.min(maxima.min[0], position[0]),
@@ -29,7 +28,6 @@
 			min: [ Infinity, Infinity ],
 			max: [ -Infinity, -Infinity ]
 		});
-		console.log('%o', maxima);
 		return [
 			this.options.width/(maxima.max[0] - maxima.min[0]),
 			this.options.height/(maxima.max[1] - maxima.min[1]),
