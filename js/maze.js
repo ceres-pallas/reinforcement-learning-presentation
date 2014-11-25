@@ -9,11 +9,11 @@
 	Position.prototype.state = function(){
 		return [this.x, this.y];
 	};
-	
+
 	Position.prototype.at = function(state) {
 		return this.x === state[0] && this.y === state[1];
 	};
-	
+
         var Goal = function(x, y, reward) {
 	    Position.call(this, x, y);
 	    this._reward = reward;
@@ -38,8 +38,11 @@
 		this._goals.push(new Goal(x, y, reward));
 
 	};
-	Maze.prototype.goals = function(){
-		return this._goals.map(function(position){ return position.state(); });
+	Maze.prototype.goals = function(predicate){
+		predicate = predicate || function(){ return true; };
+		return this._goals
+			.filter(predicate)
+			.map(function(position){ return position.state(); });
 	};
 	Maze.prototype.rewardFor = function(state){
 		return this._goals.filter(function(position){
@@ -67,7 +70,7 @@
 	    var newState =  this.currentState(action.state);
 	    if(this.isGoal([newState.x, newState.y])) {
 		this.ended = true;
-	    } 
+	    }
 	};
 
 	Maze.prototype.currentState = function(state) {
@@ -80,11 +83,11 @@
 
         Maze.prototype.getPossibleActions = function() {
 	    var possibleActions = [
-		{state: new Position(this._state.x, this._state.y + 1), action: 'up'}, 
-		{state: new Position(this._state.x + 1, this._state.y), action: 'right'}, 
-		{state: new Position(this._state.x, this._state.y - 1), action: 'down'}, 
+		{state: new Position(this._state.x, this._state.y + 1), action: 'up'},
+		{state: new Position(this._state.x + 1, this._state.y), action: 'right'},
+		{state: new Position(this._state.x, this._state.y - 1), action: 'down'},
 		{state: new Position(this._state.x - 1, this._state.y), action: 'left'}];
-	    
+
 		var spliceAction = function(action) {
 			return this.filter(function(it) {
 				return it.action !== action;

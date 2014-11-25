@@ -4,7 +4,7 @@
 	var MazeView = $.MazeView = function(model, container, options){
 		this.model = model;
 		this.container = container;
-		this.options = options || { width: 40, height: 30 };
+		this.options = options || { width: 40, height: 30, rewardColor: { positive: 'green', negative: 'red' } };
 		var deltas = this.deltas();
 		this.options.dx = deltas[0];
 		this.options.dy = deltas[1];
@@ -44,6 +44,8 @@
 		var mx = this.options.mx;
 		var my = this.options.my;
 		ctx.save();
+		ctx.translate(0, this.options.height);
+		ctx.scale(1, -1);
 		ctx.fillStyle = 'white';
 		ctx.fillRect(0,0, this.options.width, this.options.height);
 		ctx.fillStyle = 'black';
@@ -52,6 +54,20 @@
 			ctx.fillRect((x - mx) * dx, (y - my) * dy, dx, dy);
 
 		});
+		ctx.fillStyle = this.options.rewardColor.positive;
+		this.model
+			.goals(function(goal){ return goal.reward() > 0; })
+			.forEach(function(position){
+				var x = position[0], y = position[1];
+				ctx.fillRect((x - mx) * dx, (y - my) * dy, dx, dy);
+			});
+		ctx.fillStyle = this.options.rewardColor.negative;
+		this.model
+			.goals(function(goal){ return goal.reward() < 0; })
+			.forEach(function(position){
+				var x = position[0], y = position[1];
+				ctx.fillRect((x - mx) * dx, (y - my) * dy, dx, dy);
+			});
 		ctx.restore();
 	};
 	MazeView.prototype.context = function(){
