@@ -7,18 +7,24 @@
     "reinforcement-learning.md",
     "russel-and-norvig.md",
     "maze.html",
-	[
-		{
-			"filename": "inverted-pendulum.html",
-			"attr": {
-				"data-state": "inverted-pendulum"
-			}
-		},
-		{
-			"filename": "inverted-pendulum-ai.html",
-			"attr": {
-				"data-state": "inverted-pendulum-ai"
-			}
+    [
+        {
+            "filename": "inverted-pendulum.html",
+            "attr": {
+                "data-state": "inverted-pendulum"
+            }
+        },
+        {
+            "filename": "inverted-pendulum-ai.html",
+            "attr": {
+                "data-state": "inverted-pendulum-ai"
+            }
+        }
+    ],
+	{
+		"filename": "walkthrough.html",
+		"attr": {
+			"data-state": "walkthrough"
 		}
-	]
+	}
 ]

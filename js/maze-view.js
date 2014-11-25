@@ -10,6 +10,14 @@
 	MazeView.prototype.update = function(){
 		var ctx = this.context();
 		ctx.save();
+		ctx.fillStyle = 'white';
+		ctx.fillRect(0,0, this.options.width, this.options.height);
+		ctx.fillStyle = 'black';
+		this.model.obstructions().forEach(function(position){
+			var x = position[0], y = position[1];
+			ctx.fillRect(x * 10, y * 10, 5, 5);
+
+		});
 		ctx.restore();
 	};
 	MazeView.prototype.context = function(){
