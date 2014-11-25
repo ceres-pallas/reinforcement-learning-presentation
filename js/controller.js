@@ -1,4 +1,5 @@
-(function(Maze, FunctionApproximator, SimpleAgent, Helper){
+/* global Maze, FunctionApproximator, SimpleAgent, console*/
+(function(Maze, FunctionApproximator, SimpleAgent){
     'use strict';
     
     var problem = new Maze();
@@ -25,7 +26,7 @@
     problem.addObstruction(3,3);
 
     var functionApproximator = new FunctionApproximator(
-	function(){return Math.random();},
+	Math.random,
 	0.01,
 	0.1,
 	function(elements) { return elements[Math.floor((Math.random() * elements.length))]; },
@@ -36,7 +37,7 @@
     );
 
     functionApproximator.addValueFunction(
-	functionApproximator.createValueFunction(function(s) {
+	functionApproximator.createValueFunction(function() {
 	    return 1;
 	})
     );
@@ -52,41 +53,41 @@
 	    return s.y;
 	})
     );    
-
     var agent = new SimpleAgent(problem, functionApproximator);
-    var count = 0;
+  
     function run(){
 	if(!problem.ended) {
 	    var option = agent.chooseAction();
-	    //console.log(problem.currentState());
 
 	    agent.performAction(option);
 	    run();
 	} else {
-	    agent.performAction({state: problem.currentState(), action: "end"});
+	    agent.performAction({state: problem.currentState(), action: 'end'});
+
+
+
 	    agent.reevaluateActions(problem.rewardFor([problem.currentState().x, problem.currentState().y]), 0.04);
 
-	    console.log("count: " + count);
 	    var row;
 	    for(var i = 0; i<3; i++) {
-		row  = "[" + agent.solver.getValue({x:0,y:i}) + "]";
-		row += "[" + agent.solver.getValue({x:1,y:i}) + "]";
-		row += "[" + agent.solver.getValue({x:2,y:i}) + "]";
-		row += "[" + agent.solver.getValue({x:3,y:i}) + "]";
+		row  = '[' + agent.solver.getValue({x:0,y:i}) + ']';
+		row += '[' + agent.solver.getValue({x:1,y:i}) + ']';
+		row += '[' + agent.solver.getValue({x:2,y:i}) + ']';
+		row += '[' + agent.solver.getValue({x:3,y:i}) + ']';
 		console.log(row);
 	    }
-	    var log = "";
-	    agent.solver.getValueFunctions().forEach(function(el) { log += " " +  el.getWeight(); } );
-	}
-	
-    };
+	    var log = '';
+	    agent.solver.getValueFunctions().forEach(function(el) { log += ' ' +  el.getWeight(); } );
+	}	
+    }
 
     var count = 0;
     while(count < 20) {
 	problem.ended = false;
 	problem.currentState({x:0, y:0});
     	count++;
+	console.log("log");
 	run();
     }
 
-})(Maze, FunctionApproximator, SimpleAgent, Helper);
+})(Maze, FunctionApproximator, SimpleAgent);

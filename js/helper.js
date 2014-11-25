@@ -1,10 +1,10 @@
- /*global window, module*/
+ /*global window, module, console*/
 (function($){
 	'use strict';
 	var Helper = $.Helper = {
 	    StateLoopRemover : {
 		removeLoop : function(stack, index) {
-		    console.log( Helper.StateLoopRemover.findLastOccurence(stack,index))
+		    console.log( Helper.StateLoopRemover.findLastOccurence(stack,index));
 
 		    stack.splice(index, Helper.StateLoopRemover.findLastOccurence(stack,index) - index);
 		    

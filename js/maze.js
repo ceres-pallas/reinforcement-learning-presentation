@@ -68,7 +68,7 @@
 	    if(this.isGoal([newState.x, newState.y])) {
 		this.ended = true;
 	    } 
-	}
+	};
 
 	Maze.prototype.currentState = function(state) {
 		if(state) {
