@@ -1,5 +1,5 @@
-/* global window, document, Reveal*/
-;(function(document, Reveal, Maze, MazeView){
+/* global window, document, Reveal, Position, SimpleAgent, FunctionApproximator, Util*/
+;(function(document, Reveal, Maze, MazeView, Position, SimpleAgent, FunctionApproximator, Helper){
 	'use strict';
 	var maze = new Maze();
 	maze.addObstruction(-1, -1);
@@ -229,25 +229,99 @@
 			ctx.font = '15px sans-serif';
 			ctx.textAlign = 'center';
 			ctx.textBaseline = 'middle';
-			[
-				{ x: 0 , y: 0, value: 0.5},
-				{ x: 1 , y: 0, value: 1.0},
-				{ x: 2 , y: 0, value: 1.5},
-				{ x: 3 , y: 0, value: 2},
-				{ x: 0 , y: 1, value: 0.3},
-				{ x: 2 , y: 1, value: 1.3},
-				{ x: 3 , y: 1, value: 1.8},
-				{ x: 0 , y: 2, value: 0.1},
-				{ x: 1 , y: 2, value: 0.6},
-				{ x: 2 , y: 2, value: 1.1},
-				{ x: 3 , y: 2, value: 1.6},
-			].forEach(function(data){
-				ctx.fillText(
-					data.value,
-					dx * (data.x - mx + 0.5),
-					dy * (data.y - my + 0.5)
-				);
+
+		    var functionApproximator = new FunctionApproximator(
+			Math.random,
+			0.1,
+			0,
+			function(elements) { return elements[Math.floor((Math.random() * elements.length))]; }
+		    );
+
+		    functionApproximator.addValueFunction(
+			functionApproximator.createValueFunction(function(s) { return s.x; }, function(){ return 0.5;} )
+		    );
+		    functionApproximator.addValueFunction(
+			functionApproximator.createValueFunction(function(s) { 
+			    return s.y; }, function(){return 0.2;} )
+		    );
+		    functionApproximator.addValueFunction(
+			functionApproximator.createValueFunction(function() { return 1; }, function(){return 0.1;} )
+		    );
+
+		    var agent = new SimpleAgent(maze, functionApproximator);
+		    var order = [
+			{state: new Position(0, 0), action: 'right'}, 
+			{state: new Position(1, 0), action: 'right'}, 
+			{state: new Position(2, 0), action: 'right'}, 
+			{state: new Position(3, 0), action: 'right'}, 
+			{state: new Position(3, 1), action: 'up'},
+		    ];
+		    var orderIndex = 0;
+		    agent.chooseAction = function() {
+			if(orderIndex === order.length) {
+			    orderIndex = 0;
+			}
+			var returnValue = order[orderIndex];
+			orderIndex++;
+			return returnValue;
+		    };
+		    
+		    var currentMazeValueStructure = function() {
+			return [
+				{ x: 0 , y: 0, value: agent.solver.getValue({x:0,y:2}).toPrecision(2)},
+				{ x: 1 , y: 0, value: agent.solver.getValue({x:1,y:2}).toPrecision(2)},
+				{ x: 2 , y: 0, value: agent.solver.getValue({x:2,y:2}).toPrecision(2)},
+				{ x: 3 , y: 0, value: agent.solver.getValue({x:3,y:2}).toPrecision(2)},
+				{ x: 0 , y: 1, value: agent.solver.getValue({x:0,y:1}).toPrecision(2)},
+				{ x: 2 , y: 1, value: agent.solver.getValue({x:2,y:1}).toPrecision(2)},
+				{ x: 3 , y: 1, value: agent.solver.getValue({x:3,y:1}).toPrecision(2)},
+				{ x: 0 , y: 2, value: agent.solver.getValue({x:0,y:0}).toPrecision(2)},
+				{ x: 1 , y: 2, value: agent.solver.getValue({x:1,y:0}).toPrecision(2)},
+				{ x: 2 , y: 2, value: agent.solver.getValue({x:2,y:0}).toPrecision(2)},
+				{ x: 3 , y: 2, value: agent.solver.getValue({x:3,y:0}).toPrecision(2)}
+			];
+		    };
+
+
+		    var run = function() {
+			if(!maze.ended) {
+			    var option = agent.chooseAction();
+
+			    agent.performAction(option);
+			    run();
+			} else {
+
+			    var g = 0;
+			    while(g < agent.history.length - 1) {
+				agent.history = Helper.StateLoopRemover.removeLoop(agent.history, g);
+				g++;
+			    }
+			    agent.reevaluateActions(maze.rewardFor([maze.currentState().x, maze.currentState().y]), 0.04);
+			}	
+		    };
+
+		    var drawNumbers = function() {
+			currentMazeValueStructure().forEach(function(data){
+			    ctx.fillText(
+				data.value,
+				dx * (data.x - mx + 0.5),
+				dy * (data.y - my + 0.5)
+			    );
 			});
+		    };
+		    drawNumbers();
+		    var body = document.getElementsByTagName('body')[0];
+			
+		    body.addEventListener('keydown', function(e){
+			switch(e.keyCode) {
+			case 65: /* a */
+			    run();
+			    drawNumbers();
+			    break;
+			}
+		    });
+			    
+		    
 		}
 	});
-})(document, Reveal, window.Maze, window.MazeView);
+})(document, Reveal, window.Maze, window.MazeView, Position, SimpleAgent, FunctionApproximator, Util);
