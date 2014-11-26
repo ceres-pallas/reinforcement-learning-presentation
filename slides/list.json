@@ -20,10 +20,13 @@
             }
         }
     ],
-	{
-		"filename": "walkthrough-1.html",
-		"attr": {
-			"data-state": "walkthrough-1"
-		}
-	}
+	[
+		{
+			"filename": "walkthrough-1.html",
+			"attr": {
+				"data-state": "walkthrough-1"
+			}
+		},
+		"pick-a-path.md"
+	]
 ]
