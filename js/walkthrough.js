@@ -1,4 +1,4 @@
-/* global window, document, Reveal, console*/
+/* global window, document, Reveal*/
 ;(function(document, Reveal, Maze, MazeView){
 	'use strict';
 	var maze = new Maze();
@@ -73,7 +73,6 @@
 				{ x: 0 , y: 1, value: 0.84},
 				{ x: 0 , y: 2, value: 0.80}
 			].forEach(function(data){
-				console.log(data);
 				ctx.fillText(
 					data.value,
 					dx * (data.x - mx + 0.5),
@@ -115,7 +114,6 @@
 				{ x: 2 , y: 2, value: 0},
 				{ x: 3 , y: 2, value: 0},
 			].forEach(function(data){
-				console.log(data);
 				ctx.fillText(
 					data.value,
 					dx * (data.x - mx + 0.5),
@@ -157,7 +155,6 @@
 				{ x: 2 , y: 2, value: -0.62},
 				{ x: 3 , y: 2, value: -0.82},
 			].forEach(function(data){
-				console.log(data);
 				ctx.fillText(
 					data.value,
 					dx * (data.x - mx + 0.5),
@@ -199,7 +196,6 @@
 				{ x: 2 , y: 2, value: '←'},
 				{ x: 3 , y: 2, value: '←'},
 			].forEach(function(data){
-				console.log(data);
 				ctx.fillText(
 					data.value,
 					dx * (data.x - mx + 0.5),
@@ -218,11 +214,16 @@
 				rewardColor: { positive: 'green', negative: 'red' }
 			});
 
-			var ctx = view.context();
 			var dx = view.options.dx;
 			var dy = view.options.dy;
 			var mx = view.options.mx;
 			var my = view.options.my;
+
+			var canvas = document.createElement('canvas');
+			canvas.width = 480;
+			canvas.height = 400;
+			container.appendChild(canvas);
+			var ctx = canvas.getContext('2d');
 
 			ctx.fillStyle = 'blue';
 			ctx.font = '15px sans-serif';
@@ -241,7 +242,6 @@
 				{ x: 2 , y: 2, value: 1.1},
 				{ x: 3 , y: 2, value: 1.6},
 			].forEach(function(data){
-				console.log(data);
 				ctx.fillText(
 					data.value,
 					dx * (data.x - mx + 0.5),
