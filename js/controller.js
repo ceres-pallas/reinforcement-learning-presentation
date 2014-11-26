@@ -1,4 +1,4 @@
-/* global Maze, FunctionApproximator, SimpleAgent, Helper, Position, console*/
+/* global Maze, FunctionApproximator, SimpleAgent, Helper, Position*/
 (function(Maze, FunctionApproximator, SimpleAgent, Helper){
     'use strict';
     
@@ -83,35 +83,22 @@
 		agent.history = Helper.StateLoopRemover.removeLoop(agent.history, g);
 		g++;
 	    }
-console.log(problem.currentState(), problem.rewardFor([problem.currentState().x, problem.currentState().y]), problem.ended);
 	    agent.reevaluateActions(problem.rewardFor([problem.currentState().x, problem.currentState().y]), 0.04);
-	    
 	}	
     }
 
-    var logWeights = function() {
-	var log = '';
-	agent.solver.getValueFunctions().forEach(
-	    function(el) { 
-		log += ' ' +  el.getWeight(); 
-	    });
-	console.log(log);
-    };
 
     var count = 0;
     while(count < 3) {
 	problem.ended = false;
 	problem.currentState({x:0, y:0});
     	count++;
-	console.log('count %s', count);
-	logWeights();
 	var row;
 	for(var i = 2; i>=0; i--) {
 	    row  = '[' + agent.solver.getValue({x:0,y:i}) + ' ' + agent.problem.rewardFor([0,i]) + ']';
 	    row += '[' + agent.solver.getValue({x:1,y:i}) + ' ' + agent.problem.rewardFor([1,i]) + ']';
 	    row += '[' + agent.solver.getValue({x:2,y:i}) + ' ' + agent.problem.rewardFor([2,i]) + ']';
 	    row += '[' + agent.solver.getValue({x:3,y:i}) + ' ' + agent.problem.rewardFor([3,i]) + ']';
-	    console.log(row);
 	}
 
 	run();
