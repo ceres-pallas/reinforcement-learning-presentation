@@ -37,7 +37,7 @@
                 "data-state": "walkthrough-2"
             }
         },
-		"learning-parameter.md",
+        "learning-parameter.md",
         {
             "filename": "walkthrough-3.html",
             "attr": {
@@ -56,5 +56,6 @@
                 "data-state": "walkthrough-5"
             }
         }
-    ]
+    ],
+    "function-approximation.md"
 ]

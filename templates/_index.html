@@ -73,6 +73,10 @@
                 theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
                 transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
+                math: {
+                  mathjax: 'bower_components/MathJax/unpacked/MathJax.js',
+                  config: 'TeX-AMS_HTML-full'
+                },
                 // Optional libraries used to extend on reveal.js
                 dependencies: [
                     { src: 'bower_components/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
@@ -84,6 +88,7 @@
                     // { src: 'bower_components/reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
                     //{ src: 'bower_components/reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
 
+                    { src: 'bower_components/reveal.js/plugin/math/math.js', async: true, condition: function() { return !!document.querySelector( '[data-html]' ); } },
                     { src: 'js/loadhtmlslides.js', condition: function() { return !!document.querySelector( '[data-html]' ); } }
                 ]
             });
