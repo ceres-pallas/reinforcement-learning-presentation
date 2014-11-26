@@ -268,17 +268,17 @@
 		    
 		    var currentMazeValueStructure = function() {
 			return [
-				{ x: 0 , y: 0, value: agent.solver.getValue({x:0,y:2}).toPrecision(2)},
-				{ x: 1 , y: 0, value: agent.solver.getValue({x:1,y:2}).toPrecision(2)},
-				{ x: 2 , y: 0, value: agent.solver.getValue({x:2,y:2}).toPrecision(2)},
-				{ x: 3 , y: 0, value: agent.solver.getValue({x:3,y:2}).toPrecision(2)},
-				{ x: 0 , y: 1, value: agent.solver.getValue({x:0,y:1}).toPrecision(2)},
-				{ x: 2 , y: 1, value: agent.solver.getValue({x:2,y:1}).toPrecision(2)},
-				{ x: 3 , y: 1, value: agent.solver.getValue({x:3,y:1}).toPrecision(2)},
-				{ x: 0 , y: 2, value: agent.solver.getValue({x:0,y:0}).toPrecision(2)},
-				{ x: 1 , y: 2, value: agent.solver.getValue({x:1,y:0}).toPrecision(2)},
-				{ x: 2 , y: 2, value: agent.solver.getValue({x:2,y:0}).toPrecision(2)},
-				{ x: 3 , y: 2, value: agent.solver.getValue({x:3,y:0}).toPrecision(2)}
+				{ x: 0 , y: 0, value: agent.solver.getValue({x:0,y:2}).toPrecision(3)},
+				{ x: 1 , y: 0, value: agent.solver.getValue({x:1,y:2}).toPrecision(3)},
+				{ x: 2 , y: 0, value: agent.solver.getValue({x:2,y:2}).toPrecision(3)},
+				{ x: 3 , y: 0, value: agent.solver.getValue({x:3,y:2}).toPrecision(3)},
+				{ x: 0 , y: 1, value: agent.solver.getValue({x:0,y:1}).toPrecision(3)},
+				{ x: 2 , y: 1, value: agent.solver.getValue({x:2,y:1}).toPrecision(3)},
+				{ x: 3 , y: 1, value: agent.solver.getValue({x:3,y:1}).toPrecision(3)},
+				{ x: 0 , y: 2, value: agent.solver.getValue({x:0,y:0}).toPrecision(3)},
+				{ x: 1 , y: 2, value: agent.solver.getValue({x:1,y:0}).toPrecision(3)},
+				{ x: 2 , y: 2, value: agent.solver.getValue({x:2,y:0}).toPrecision(3)},
+				{ x: 3 , y: 2, value: agent.solver.getValue({x:3,y:0}).toPrecision(3)}
 			];
 		    };
 
@@ -290,7 +290,7 @@
 			    agent.performAction(option);
 			    run();
 			} else {
-
+			    
 			    var g = 0;
 			    while(g < agent.history.length - 1) {
 				agent.history = Helper.StateLoopRemover.removeLoop(agent.history, g);
@@ -301,6 +301,8 @@
 		    };
 
 		    var drawNumbers = function() {
+			ctx.clearRect(0,0, 480,400);
+			
 			currentMazeValueStructure().forEach(function(data){
 			    ctx.fillText(
 				data.value,
@@ -315,8 +317,19 @@
 		    body.addEventListener('keydown', function(e){
 			switch(e.keyCode) {
 			case 65: /* a */
+			    maze.ended = false;
+			    maze.currentState({x:0, y:0});
+    
 			    run();
+			    
 			    drawNumbers();
+			    order = [
+				{state: new Position(0, 1), action: 'up'}, 
+				{state: new Position(0, 2), action: 'up'}, 
+				{state: new Position(1, 2), action: 'right'}, 
+				{state: new Position(2, 2), action: 'right'},
+				{state: new Position(3, 2), action: 'right'},
+			    ];
 			    break;
 			}
 		    });
