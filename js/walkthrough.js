@@ -26,8 +26,6 @@
 	maze.addGoal(3, 2);
 	maze.addGoal(3, 1, -1);
 
-	var sizeMultiplier = 8;
-
 	var isSetup = {
 		'walkthrough1': false
 	};
@@ -37,7 +35,7 @@
 			var container = document.getElementById('walkthrough-1-maze');
 
 			new MazeView(maze, container, {
-				width: sizeMultiplier * 60, height: sizeMultiplier * 50,
+				width: 480, height: 400,
 				rewardColor: { positive: 'green', negative: 'red' }
 			});
 		}
