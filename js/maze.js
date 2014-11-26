@@ -1,4 +1,4 @@
- /*global window, module*/
+ /*global window, module, console*/
 (function($){
 	'use strict';
 	var Position = $.Position = function(x, y) {
@@ -67,8 +67,8 @@
 	};
 
         Maze.prototype.tick = function(action) {
-	    var newState =  this.currentState(action.state);
-	    if(this.isGoal([newState.x, newState.y])) {
+	    var currentState = this.currentState(action.state);
+	    if(this.isGoal([currentState.x, currentState.y])) {
 		this.ended = true;
 	    }
 	};
