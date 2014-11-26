@@ -28,7 +28,8 @@
 
 	var isSetup = {
 		'walkthrough1': false,
-		'walkthrough2': false
+		'walkthrough2': false,
+		'walkthrough3': false
 	};
 	Reveal.addEventListener('walkthrough-1', function(){
 		if (!isSetup.walkthrough1) {
@@ -68,6 +69,48 @@
 				{ x: 0 , y: 0, value: 0.88},
 				{ x: 0 , y: 1, value: 0.84},
 				{ x: 0 , y: 2, value: 0.80}
+			].forEach(function(data){
+				console.log(data);
+				ctx.fillText(
+					data.value,
+					dx * (data.x - mx + 0.5),
+					dy * (data.y - my + 0.5)
+				);
+			});
+		}
+	});
+	Reveal.addEventListener('walkthrough-3', function(){
+		if (!isSetup.walkthrough3) {
+			isSetup.walkthrough3 = true;
+			var container = document.getElementById('walkthrough-3-maze');
+
+			var view = new MazeView(maze, container, {
+				width: 480, height: 400,
+				rewardColor: { positive: 'green', negative: 'red' }
+			});
+
+			var ctx = view.context();
+			var dx = view.options.dx;
+			var dy = view.options.dy;
+			var mx = view.options.mx;
+			var my = view.options.my;
+
+			ctx.fillStyle = 'blue';
+			ctx.font = '15px sans-serif';
+			ctx.textAlign = 'center';
+			ctx.textBaseline = 'middle';
+			[
+				{ x: 3 , y: 0, value: 1},
+				{ x: 2 , y: 0, value: 0.096},
+				{ x: 1 , y: 0, value: 0.092},
+				{ x: 0 , y: 0, value: 0.088},
+				{ x: 0 , y: 1, value: 0.084},
+				{ x: 0 , y: 2, value: 0.080},
+				{ x: 2 , y: 1, value: 0},
+				{ x: 3 , y: 1, value: 0},
+				{ x: 1 , y: 2, value: 0},
+				{ x: 2 , y: 2, value: 0},
+				{ x: 3 , y: 2, value: 0},
 			].forEach(function(data){
 				console.log(data);
 				ctx.fillText(
