@@ -5,8 +5,12 @@
     "reveal.js": "~2.6.1",
     "function-approximator": "~0.0.0",
     "simple-agent": "~0.1.0",
+<<<<<<< HEAD
     "inverted-pendulum": "~0.1.0",
     "MathJax": "~2.4.0"
+=======
+    "inverted-pendulum": "~0.1.0"
+>>>>>>> Updated dependencies
   },
   "devDependencies": {
     "jasmine": "~2.0.0"
