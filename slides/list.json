@@ -22,9 +22,9 @@
         }
     ],
 	{
-		"filename": "walkthrough.html",
+		"filename": "walkthrough-1.html",
 		"attr": {
-			"data-state": "walkthrough"
+			"data-state": "walkthrough-1"
 		}
 	}
 ]

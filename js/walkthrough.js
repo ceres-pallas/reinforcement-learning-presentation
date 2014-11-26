@@ -29,12 +29,12 @@
 	var sizeMultiplier = 8;
 
 	var isSetup = {
-		'walkthrough': false
+		'walkthrough1': false
 	};
-	Reveal.addEventListener('walkthrough', function(){
-		if (!isSetup.walkthrough) {
-			isSetup.walkthrough = true;
-			var container = document.getElementById('walkthrough-maze');
+	Reveal.addEventListener('walkthrough-1', function(){
+		if (!isSetup.walkthrough1) {
+			isSetup.walkthrough1 = true;
+			var container = document.getElementById('walkthrough-1-maze');
 
 			new MazeView(maze, container, {
 				width: sizeMultiplier * 60, height: sizeMultiplier * 50,
