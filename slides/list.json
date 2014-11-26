@@ -57,5 +57,6 @@
             }
         }
     ],
-    "function-approximation.md"
+    "function-approximation.md",
+    "value-functions.html"
 ]
