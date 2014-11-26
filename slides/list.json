@@ -20,13 +20,22 @@
             }
         }
     ],
-	[
-		{
-			"filename": "walkthrough-1.html",
-			"attr": {
-				"data-state": "walkthrough-1"
-			}
-		},
-		"pick-a-path.md"
-	]
+    [
+        {
+            "filename": "walkthrough-1.html",
+            "attr": {
+                "data-state": "walkthrough-1"
+            }
+        },
+        "policy.md",
+        "pick-a-path.md",
+        "cost-of-step.md",
+		"reward-to-go.md",
+        {
+            "filename": "walkthrough-2.html",
+            "attr": {
+                "data-state": "walkthrough-2"
+            }
+        }
+    ]
 ]
