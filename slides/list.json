@@ -43,6 +43,13 @@
             "attr": {
                 "data-state": "walkthrough-3"
             }
+        },
+        {
+            "filename": "walkthrough-4.html",
+            "attr": {
+                "data-state": "walkthrough-4"
+            }
         }
+
     ]
 ]
