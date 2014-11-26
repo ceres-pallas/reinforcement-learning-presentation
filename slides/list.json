@@ -58,5 +58,12 @@
         }
     ],
     "function-approximation.md",
-    "value-functions.html"
+    "value-functions.html",
+    {
+        "filename": "walkthrough-6.html",
+        "attr": {
+            "data-state": "walkthrough-6"
+        }
+    }
+
 ]
