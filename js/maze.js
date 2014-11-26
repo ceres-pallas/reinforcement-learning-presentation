@@ -1,4 +1,4 @@
- /*global window, module, console*/
+ /*global window, module*/
 (function($){
 	'use strict';
 	var Position = $.Position = function(x, y) {
